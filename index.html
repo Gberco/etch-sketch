@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Este es un ejercicio</title>
+    </head>
+    
+    <body>
+        <div id="div-original">
+        </div>
+    </body>
+    
+    <style>
+        .grid-16
+        {
+            clear: none;
+            display: inline-grid;
+            background-color: aqua;
+            width: 5.625%;
+            padding-top: 5.625%;
+            border-color: blacK;
+            border-style: solid;
+            border-width: 0.11px; 
+            margin: 0.2%;
+        }
+        
+       /* .grid-16:hover
+        {
+            background-color: red;
+        }*/
+        
+    </style>
+    
+    <script>
+        var element = document.getElementById("div-original");
+        var div;
+        
+        function gridMaker(){            
+            for( let i = 0; i < 256; i++ )
+                {
+                    var divi = document.createElement("div");
+                    divi.className = `grid-16 ${i}`;
+                    element.appendChild(divi);
+                    
+                    div = divi;
+                } // fin de for
+        } // fin de gridMaker
+        gridMaker();
+        
+        console.log(div);
+        div.addEventListener("mouseover", () => div.style.backgroundColor="blue");
+        
+
+    </script>
+
+</html>
