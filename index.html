@@ -5,11 +5,19 @@
     </head>
     
     <body>
+        <div style="padding-bottom: 2%;">
+            <button onclick="cargarDatos()">Que tablero quiere?</button>
+            <button onclick="resetear()">Resetear</button>
+        </div>
         <div id="div-original">
         </div>
     </body>
     
     <style>
+        
+        .button
+        {
+        }
         .grid-16
         {
             clear: none;
@@ -27,36 +35,82 @@
         .grid-seleccion
         {
             background-color: red;
-            transition: background-color 0.5s ease;
+
         }
         
     </style>
     
     <script>
         var element = document.getElementById("div-original");
-        const div = [];
+        var numeros = 2;
+       
+        
+        function cargarDatos(){
+            var e = prompt('cuadrados por: ');
+            if( e !== null)
+                {
+                    numeros = e;
+                    gridEraser();
+                } else {
+                    return;
+                }
+            
+            gridMaker();
+            juego();
+            
+        }
+        
+        function resetear(){
+            
+            const cuadrados = Array.from( document.querySelectorAll('.grid-16'));
+          cuadrados.forEach( function(e) { 
+              e.classList.remove('grid-selecction'); 
+              });           
+      
+        }
+        
+        function gridEraser(){
+            while(element.firstChild){
+                  element.removeChild(element.firstChild);
+                }
+        }
         
         function gridMaker(){            
-            for( let i = 0; i < 256; i++ )
+            for( let i = 0; i < (numeros*numeros); i++ )
                 {
                     var divi = document.createElement("div");
                     divi.className = `grid-16 ${i}`;
                     element.appendChild(divi);
                     
-                    div[i] = divi;
                     //console.log(div[i]);
                 } // fin de for
         } // fin de gridMaker
-        gridMaker();
+        
+        function removerColor(e){
+            e.target.classList.remove('grid-seleccion');
+        }
+        
+       
         
         
+        function juego(){
+            const cuadrados = Array.from( document.querySelectorAll('.grid-16'));
+
         
-        div.forEach(function(element){
-            element.addEventListener( "mouseover", () => {
-                element.classList.toggle('grid-seleccion');
-                console.log(element);
+        
+            cuadrados.forEach(function(element){
+                element.addEventListener( "mouseover", () => {
+                    element.classList.add('grid-seleccion');
+
+                });
             });
-        })
+        }
+        
+        // inicia el juego
+        gridMaker();
+        juego();
+        
+        //cuadrados.forEach( function(element){ element.addEventListener('transitionend', removerColor)});
       
         
 
